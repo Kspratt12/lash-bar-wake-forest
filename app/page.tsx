@@ -10,6 +10,7 @@ import Editorial from "@/components/sections/Editorial";
 import Schedule from "@/components/sections/Schedule";
 import Services from "@/components/sections/Services";
 import Pricing from "@/components/sections/Pricing";
+import FAQ from "@/components/sections/FAQ";
 import AreasServed from "@/components/sections/AreasServed";
 import Contact from "@/components/sections/Contact";
 import Footer from "@/components/sections/Footer";
@@ -31,6 +32,7 @@ export default function Home() {
       <Services />
       <Schedule />
       <Pricing />
+      <FAQ />
       <AreasServed />
       <Contact />
       <Footer />
