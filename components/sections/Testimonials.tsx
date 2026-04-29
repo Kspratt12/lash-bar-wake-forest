@@ -15,9 +15,9 @@ const REVIEWS: Review[] = [
       "First time getting extensions and I was nervous. The mapping process is incredible, my lashes feel like nothing, and I get compliments every day.",
   },
   {
-    name: "Sara L.",
+    name: "Hannah P.",
     body:
-      "Switched after one set. Retention is unmatched. My fills last longer, the curl is gorgeous, and the whole vibe is luxe.",
+      "The studio is gorgeous, the music is on point, and the lashes I leave with always look exactly like the inspo I bring. Real artist.",
   },
 ];
 

@@ -1,22 +1,23 @@
 import Image from "next/image";
+import Reveal from "@/components/Reveal";
 
 export default function About() {
   return (
     <section id="about" className="relative bg-cream py-24 sm:py-32">
       <div className="max-w-[1300px] mx-auto px-5 sm:px-8 grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
-        <div className="lg:col-span-5">
+        <Reveal className="lg:col-span-5">
           <div className="relative aspect-[4/5] w-full rounded-[28px] overflow-hidden">
             <Image
               src="/images/photo-3.png"
               alt="Inside Lash Bar Wake Forest"
               fill
               sizes="(max-width: 1024px) 100vw, 540px"
-              className="object-cover"
+              className="object-cover transition-transform duration-[1400ms] hover:scale-[1.03]"
             />
           </div>
-        </div>
+        </Reveal>
 
-        <div className="lg:col-span-7">
+        <Reveal delay={140} className="lg:col-span-7">
           <h2 className="font-display text-[clamp(2.4rem,4.8vw,4.4rem)] leading-[1.04] tracking-[-0.02em] font-medium text-copper-900">
             Lashes that look
             <br />
@@ -33,7 +34,7 @@ export default function About() {
             Pro-grade lashes, lash-safe adhesive, and an hour that feels nothing
             like a salon.
           </p>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

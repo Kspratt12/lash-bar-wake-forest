@@ -92,8 +92,9 @@ export default function Header() {
             className="w-11 h-11 sm:w-12 sm:h-12 object-contain"
             priority
           />
-          <span className="font-display text-[22px] sm:text-[26px] tracking-[-0.01em] text-copper-800">
+          <span className="font-display text-[20px] sm:text-[24px] tracking-[-0.01em] text-copper-800 leading-tight">
             Lash Bar
+            <span className="hidden sm:inline"> Wake Forest</span>
           </span>
         </Link>
 

@@ -1,6 +1,7 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import Reveal from "@/components/Reveal";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 
 const BOOK_URL =
   "https://book.squareup.com/appointments/mgcls009iy8isa/location/L5GD315DBCWK3/services";
@@ -55,9 +56,9 @@ const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 function statusLabel(s: Slot["status"]) {
-  if (s === "open") return { label: "Open", color: "text-copper-700", dot: "bg-copper-500" };
-  if (s === "few") return { label: "A few left", color: "text-copper-800", dot: "bg-copper-700" };
-  return { label: "Waitlist", color: "text-ink-soft", dot: "bg-ink-soft" };
+  if (s === "open") return { label: "Open", color: "text-copper-700", dot: "bg-copper-500", pulse: true };
+  if (s === "few") return { label: "A few left", color: "text-copper-800", dot: "bg-copper-700", pulse: true };
+  return { label: "Waitlist", color: "text-ink-soft", dot: "bg-ink-soft", pulse: false };
 }
 
 export default function Calendar() {
@@ -78,59 +79,112 @@ export default function Calendar() {
   const [selected, setSelected] = useState(0);
   const slots = SCHEDULE[String(selected)] ?? [];
 
+  // Sliding active-day indicator
+  const tabsRef = useRef<HTMLDivElement>(null);
+  const [indicator, setIndicator] = useState({ left: 0, width: 0, opacity: 0 });
+
+  const measureIndicator = () => {
+    const root = tabsRef.current;
+    if (!root) return;
+    const btn = root.querySelector<HTMLElement>(`[data-day-index="${selected}"]`);
+    if (!btn) return;
+    const r = btn.getBoundingClientRect();
+    const rootR = root.getBoundingClientRect();
+    setIndicator({
+      left: r.left - rootR.left + root.scrollLeft,
+      width: r.width,
+      opacity: 1,
+    });
+  };
+
+  useLayoutEffect(measureIndicator, [selected]);
+  useEffect(() => {
+    measureIndicator();
+    const onResize = () => measureIndicator();
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
-    <section id="book" className="relative bg-cream py-24 sm:py-32">
-      <div className="max-w-[1300px] mx-auto px-5 sm:px-8">
-        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-12">
+    <section id="book" className="relative bg-copper-900 text-cream py-24 sm:py-32 overflow-hidden">
+      <div
+        aria-hidden
+        className="absolute inset-0 pointer-events-none opacity-40"
+        style={{
+          background:
+            "radial-gradient(ellipse 70% 50% at 50% 0%, rgba(220, 192, 154, 0.45) 0%, transparent 60%)",
+        }}
+      />
+
+      <div className="relative max-w-[1300px] mx-auto px-5 sm:px-8">
+        <Reveal className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-12">
           <div>
-            <h2 className="font-display text-[clamp(2.2rem,4.4vw,4rem)] leading-[1.04] tracking-[-0.02em] font-medium text-copper-900 max-w-2xl">
-              This week at <span className="script-italic">Lash Bar.</span>
+            <div className="text-[12px] tracking-[0.32em] uppercase text-cardtan font-medium">
+              The Calendar
+            </div>
+            <h2 className="mt-4 font-display text-[clamp(2.4rem,4.8vw,4.4rem)] leading-[1.02] tracking-[-0.025em] font-medium max-w-2xl">
+              This week at <span className="script-italic is-light">Lash Bar.</span>
             </h2>
-            <p className="mt-4 text-ink-soft text-[15.5px] font-light max-w-md">
-              Slots are pulled from Square. Tap a time to reserve in real time.
+            <p className="mt-4 text-cream/70 text-[15.5px] font-light max-w-md">
+              Live availability through Square. Tap a time to reserve.
             </p>
           </div>
           <a
             href={BOOK_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-primary self-start sm:self-end"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-cream text-copper-900 font-medium text-[13px] hover:bg-cardtan transition self-start sm:self-end"
           >
             Open Full Calendar
           </a>
-        </div>
+        </Reveal>
 
-        <div className="overflow-x-auto -mx-5 sm:mx-0 px-5 sm:px-0 no-scrollbar">
-          <div className="flex gap-2 min-w-max sm:min-w-0 sm:grid sm:grid-cols-7">
-            {week.map((d) => {
-              const active = d.index === selected;
-              return (
-                <button
-                  key={d.index}
-                  type="button"
-                  onClick={() => setSelected(d.index)}
-                  className={`px-5 sm:px-3 py-4 rounded-2xl text-center transition-all ${
-                    active
-                      ? "bg-copper-900 text-cream"
-                      : "bg-cardcream text-copper-900 hover:bg-cardtan"
-                  }`}
-                >
-                  <div className={`text-[10px] tracking-[0.28em] uppercase font-medium ${active ? "text-cream/70" : "text-ink-soft"}`}>
-                    {d.day}
-                  </div>
-                  <div className="font-display text-[24px] tracking-[-0.01em] mt-1 leading-none">
-                    {d.date}
-                  </div>
-                  <div className={`text-[10px] tracking-[0.18em] uppercase mt-1 ${active ? "text-cream/70" : "text-ink-soft"}`}>
-                    {d.month}
-                  </div>
-                </button>
-              );
-            })}
+        <Reveal delay={120}>
+          <div className="overflow-x-auto -mx-5 sm:mx-0 px-5 sm:px-0 no-scrollbar">
+            <div
+              ref={tabsRef}
+              className="relative flex gap-2 min-w-max sm:min-w-0 sm:grid sm:grid-cols-7"
+            >
+              {/* sliding active indicator */}
+              <div
+                aria-hidden
+                className="absolute top-0 bottom-0 rounded-2xl bg-cream transition-all duration-500 ease-[cubic-bezier(0.2,0.7,0.2,1)] pointer-events-none"
+                style={{
+                  left: indicator.left,
+                  width: indicator.width,
+                  opacity: indicator.opacity,
+                }}
+              />
+              {week.map((d) => {
+                const active = d.index === selected;
+                return (
+                  <button
+                    key={d.index}
+                    type="button"
+                    data-day-index={d.index}
+                    onClick={() => setSelected(d.index)}
+                    className={`relative z-10 px-5 sm:px-3 py-4 rounded-2xl text-center transition-colors duration-500 ${
+                      active ? "text-copper-900" : "text-cream hover:bg-cream/8"
+                    }`}
+                  >
+                    <div className={`text-[10px] tracking-[0.28em] uppercase font-medium ${active ? "text-copper-700" : "text-cream/55"}`}>
+                      {d.day}
+                    </div>
+                    <div className="font-display text-[26px] tracking-[-0.01em] mt-1 leading-none">
+                      {d.date}
+                    </div>
+                    <div className={`text-[10px] tracking-[0.18em] uppercase mt-1 ${active ? "text-copper-700" : "text-cream/55"}`}>
+                      {d.month}
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
           </div>
-        </div>
+        </Reveal>
 
-        <div className="mt-8 grid md:grid-cols-2 gap-3.5">
+        <div key={selected} className="mt-10 grid md:grid-cols-2 gap-3.5">
           {slots.map((s, i) => {
             const st = statusLabel(s.status);
             return (
@@ -139,16 +193,26 @@ export default function Calendar() {
                 href={BOOK_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group bg-cardcream rounded-[20px] p-6 flex items-center justify-between gap-5 hover:bg-cardtan transition-colors"
+                style={{ ["--i" as string]: i }}
+                className="slot-in group relative bg-cream/95 backdrop-blur-sm rounded-[22px] p-6 flex items-center justify-between gap-5 ring-1 ring-cream/15 transition-all duration-500 hover:bg-cream hover:shadow-[0_30px_70px_-20px_rgba(0,0,0,0.4)] hover:-translate-y-0.5 overflow-hidden"
               >
-                <div className="min-w-0">
+                {/* hover sheen */}
+                <div
+                  aria-hidden
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+                  style={{
+                    background:
+                      "linear-gradient(120deg, transparent 30%, rgba(220, 192, 154, 0.18) 50%, transparent 70%)",
+                  }}
+                />
+                <div className="relative min-w-0">
                   <div className="font-display text-[15px] italic text-copper-700">
                     {s.time}
                   </div>
                   <div className="font-display text-[24px] tracking-[-0.01em] text-copper-900 leading-tight mt-0.5">
                     {s.service}
                   </div>
-                  <div className="mt-2 flex items-center gap-3 text-[12.5px] text-ink-soft font-light">
+                  <div className="mt-2.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-[12.5px] text-ink-soft font-light">
                     {s.duration && <span>{s.duration}</span>}
                     {s.price && (
                       <>
@@ -158,12 +222,12 @@ export default function Calendar() {
                     )}
                     <span aria-hidden className="text-rule">·</span>
                     <span className={`inline-flex items-center gap-1.5 ${st.color}`}>
-                      <span className={`w-1.5 h-1.5 rounded-full ${st.dot}`} />
+                      <span className={`w-1.5 h-1.5 rounded-full ${st.dot} ${st.pulse ? "pulse-dot" : ""}`} />
                       {st.label}
                     </span>
                   </div>
                 </div>
-                <div className="shrink-0 w-10 h-10 rounded-full bg-copper-900 text-cream grid place-items-center group-hover:bg-copper-800 transition-colors">
+                <div className="relative shrink-0 w-11 h-11 rounded-full bg-copper-900 text-cream grid place-items-center transition-transform duration-500 group-hover:translate-x-1">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round">
                     <path d="M5 12h14M13 5l7 7-7 7" />
                   </svg>
