@@ -2,11 +2,8 @@ import Header from "@/components/Header";
 import Hero from "@/components/sections/Hero";
 import Bento from "@/components/sections/Bento";
 import About from "@/components/sections/About";
-import MeetArtist from "@/components/sections/MeetArtist";
-import Experience from "@/components/sections/Experience";
+import Calendar from "@/components/sections/Calendar";
 import Schedule from "@/components/sections/Schedule";
-import LashCare from "@/components/sections/LashCare";
-import MoreThan from "@/components/sections/MoreThan";
 import Services from "@/components/sections/Services";
 import Pricing from "@/components/sections/Pricing";
 import Lookbook from "@/components/sections/Lookbook";
@@ -22,14 +19,11 @@ export default function Home() {
       <Hero />
       <Bento />
       <About />
-      <MeetArtist />
-      <Experience />
-      <Schedule />
       <Services />
+      <Calendar />
+      <Schedule />
       <Pricing />
       <Lookbook />
-      <MoreThan />
-      <LashCare />
       <Testimonials />
       <AreasServed />
       <Contact />

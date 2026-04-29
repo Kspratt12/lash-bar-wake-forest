@@ -148,8 +148,8 @@ const localBusinessJsonLd = {
     name: "Lash Services",
     itemListElement: [
       { "@type": "Offer", price: "135", priceCurrency: "USD", itemOffered: { "@type": "Service", name: "Lash Extension Full Set", description: "Custom-mapped Classic, Hybrid, or Volume lash extension full set." } },
-      { "@type": "Offer", price: "85", priceCurrency: "USD", itemOffered: { "@type": "Service", name: "Lash Fill — 2 Weeks" } },
-      { "@type": "Offer", price: "100", priceCurrency: "USD", itemOffered: { "@type": "Service", name: "Lash Fill — 3 Weeks" } },
+      { "@type": "Offer", price: "85", priceCurrency: "USD", itemOffered: { "@type": "Service", name: "Lash Fill, 2 Weeks" } },
+      { "@type": "Offer", price: "100", priceCurrency: "USD", itemOffered: { "@type": "Service", name: "Lash Fill, 3 Weeks" } },
       { "@type": "Offer", price: "100", priceCurrency: "USD", itemOffered: { "@type": "Service", name: "Foreign Fill", description: "Refresh of lash extensions originally applied at another studio." } },
       { "@type": "Offer", price: "50", priceCurrency: "USD", itemOffered: { "@type": "Service", name: "Lash Removal" } },
       { "@type": "Offer", price: "30", priceCurrency: "USD", itemOffered: { "@type": "Service", name: "Cluster Lashes" } },
@@ -225,7 +225,7 @@ const faqJsonLd = {
       name: "How do I book an appointment at Lash Bar Wake Forest?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Booking is open through Square at book.squareup.com — slots open weekly. You can also email Lashbarwakeforest@gmail.com or text (720) 402-9075.",
+        text: "Booking is open through Square at book.squareup.com. Slots open weekly. You can also email Lashbarwakeforest@gmail.com or text (720) 402-9075.",
       },
     },
     {
@@ -233,7 +233,7 @@ const faqJsonLd = {
       name: "Do you take clients from Rolesville, Youngsville, and North Raleigh?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Yes — clients regularly travel to Lash Bar Wake Forest from Rolesville, Youngsville, North Raleigh, Wakefield, Heritage, and Forestville. The studio is on S Main Street, easy to reach off Capital Boulevard.",
+        text: "Yes. Clients regularly travel to Lash Bar Wake Forest from Rolesville, Youngsville, North Raleigh, Wakefield, Heritage, and Forestville. The studio is on S Main Street, easy to reach off Capital Boulevard.",
       },
     },
   ],

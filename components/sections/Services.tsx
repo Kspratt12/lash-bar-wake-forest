@@ -1,56 +1,27 @@
 const FEATURES = [
-  {
-    title: "Hand-mapped",
-    body:
-      "Every set is custom mapped to your eye shape so the lashes flatter you, not the trend.",
-  },
-  {
-    title: "Premium products",
-    body:
-      "High-grade adhesives and cruelty-free lashes that hold beautifully and feel weightless.",
-  },
-  {
-    title: "Boutique by design",
-    body:
-      "Single-suite studio. Quiet music, soft lighting, no rushing — just intentional time on your eyes.",
-  },
-  {
-    title: "All eyes welcome",
-    body:
-      "First-timers, longtime wearers, hooded, monolid, mature lashes — we shape every set to fit you.",
-  },
+  { title: "Custom mapping", body: "Every set is shaped to your eye, not a stencil." },
+  { title: "Pro-grade lashes", body: "Cruelty-free, weightless, and built to hold." },
+  { title: "Quiet hour", body: "One client at a time. Soft music, no rush." },
 ];
 
 export default function Services() {
   return (
-    <section id="services" className="relative bg-ink text-white py-28 sm:py-40 overflow-hidden">
-      <div className="relative max-w-[1400px] mx-auto px-6 sm:px-10 grid lg:grid-cols-12 gap-10 lg:gap-20">
-        <div className="lg:col-span-5">
-          <span className="eyebrow is-light">The Approach</span>
-          <h2 className="mt-6 font-display text-[clamp(2.4rem,5vw,4.8rem)] leading-[1.02] tracking-[-0.02em] font-medium">
-            Not your average
-            <br />
-            <span className="script-italic is-light">lash bar.</span>
-          </h2>
-          <div className="section-divider is-light" />
-          <p className="mt-8 text-white/70 text-[17px] leading-[1.8] font-light max-w-md">
-            Classic, Hybrid, and Volume extensions, applied with the kind of
-            precision and care that turns a beauty appointment into a part of
-            your weekly reset.
-          </p>
-        </div>
+    <section id="services" className="relative bg-cream2 py-24 sm:py-32">
+      <div className="max-w-[1300px] mx-auto px-5 sm:px-8">
+        <h2 className="font-display text-[clamp(2.2rem,4.4vw,4rem)] leading-[1.04] tracking-[-0.02em] font-medium text-copper-900 max-w-3xl">
+          A small studio, with a <span className="script-italic">lot of detail.</span>
+        </h2>
 
-        <div className="lg:col-span-7 grid sm:grid-cols-2 gap-6">
+        <div className="mt-16 grid sm:grid-cols-3 gap-x-10 gap-y-10">
           {FEATURES.map((f, i) => (
-            <div key={f.title} className="group">
-              <div className="flex items-baseline gap-4">
-                <span className="font-display text-copper-300 text-[20px] tracking-[-0.01em]">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <h3 className="font-display text-[26px] tracking-[-0.015em]">{f.title}</h3>
+            <div key={f.title}>
+              <div className="font-display text-copper-700 text-[15px] tracking-[0.02em] italic">
+                {String(i + 1).padStart(2, "0")} / 03
               </div>
-              <div className="mt-3 ml-9 h-px bg-gradient-to-r from-white/15 to-transparent" />
-              <p className="mt-4 ml-9 text-white/65 leading-[1.75] text-[15px] font-light">
+              <h3 className="mt-4 font-display text-[26px] tracking-[-0.01em] text-copper-900 font-medium">
+                {f.title}
+              </h3>
+              <p className="mt-3 text-ink-soft text-[15.5px] leading-[1.75] font-light max-w-sm">
                 {f.body}
               </p>
             </div>
