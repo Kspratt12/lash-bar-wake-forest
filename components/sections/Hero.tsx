@@ -25,19 +25,6 @@ export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
   const ctaRef = useRef<HTMLAnchorElement>(null);
 
-  // Cursor spotlight: track mouse over hero, set CSS vars
-  useEffect(() => {
-    const el = sectionRef.current;
-    if (!el) return;
-    const onMove = (e: PointerEvent) => {
-      const r = el.getBoundingClientRect();
-      el.style.setProperty("--mx", `${e.clientX - r.left}px`);
-      el.style.setProperty("--my", `${e.clientY - r.top}px`);
-    };
-    el.addEventListener("pointermove", onMove);
-    return () => el.removeEventListener("pointermove", onMove);
-  }, []);
-
   // Magnetic CTA
   useEffect(() => {
     const el = ctaRef.current;
@@ -93,7 +80,6 @@ export default function Hero() {
           poster="/images/photo-1.png"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-[#1A130C]/35 via-[#1A130C]/15 to-[#1A130C]/65" />
-        <div className="absolute inset-0 spotlight-mask pointer-events-none" />
 
         <div className="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-6 sm:px-10 pt-20 pb-20">
           <h1 className="font-display text-white text-[clamp(2.6rem,7.4vw,6rem)] leading-[1.02] tracking-[-0.02em] font-medium max-w-5xl">
