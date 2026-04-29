@@ -55,10 +55,11 @@ export default function Owner() {
           <div className="relative">
             <div className="relative aspect-[4/5] w-full rounded-[28px] overflow-hidden">
               <Image
-                src="/images/Julia-Ross.png"
+                src="/images/pic-2-ross.png"
                 alt="Julia, owner and lash artist at Lash Bar Wake Forest"
                 fill
                 sizes="(max-width: 1024px) 100vw, 720px"
+                quality={95}
                 className="object-cover"
               />
             </div>
