@@ -34,7 +34,7 @@ export default function Header() {
   const [active, setActive] = useState("#home");
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
+    const onScroll = () => setScrolled(window.scrollY > 80);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -58,6 +58,8 @@ export default function Header() {
     return () => obs.disconnect();
   }, []);
 
+  const onDark = !scrolled;
+
   return (
     <header
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
@@ -68,34 +70,57 @@ export default function Header() {
     >
       <div className="max-w-[1500px] mx-auto px-5 sm:px-8 h-20 sm:h-24 grid grid-cols-[auto_1fr_auto] sm:grid-cols-3 items-center gap-4">
         <nav className="hidden lg:flex items-center gap-1.5">
-          {NAV.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              className={`px-4 py-2 rounded-full text-[13px] font-medium transition-colors ${
-                active === item.href
-                  ? "bg-cardtan text-copper-700"
-                  : "text-ink-soft hover:text-copper-700"
-              }`}
-            >
-              {item.label}
-            </a>
-          ))}
+          {NAV.map((item) => {
+            const isActive = active === item.href;
+            return (
+              <a
+                key={item.href}
+                href={item.href}
+                className={`px-4 py-2 rounded-full text-[13px] font-medium transition-colors ${
+                  isActive
+                    ? onDark
+                      ? "bg-cream/12 text-cream"
+                      : "bg-cardtan text-copper-700"
+                    : onDark
+                    ? "text-cream/75 hover:text-cream"
+                    : "text-ink-soft hover:text-copper-700"
+                }`}
+              >
+                {item.label}
+              </a>
+            );
+          })}
         </nav>
 
-        <Link href="#home" className="flex items-center justify-self-start lg:justify-self-center gap-3 group" aria-label="Lash Bar Wake Forest home">
+        <Link
+          href="#home"
+          className="flex items-center justify-self-start lg:justify-self-center gap-3 group"
+          aria-label="Lash Bar Wake Forest home"
+        >
           <span className="relative inline-block w-12 h-12 sm:w-[52px] sm:h-[52px]">
-            <span className="absolute inset-0 rounded-full ring-1 ring-copper-400/60 group-hover:ring-copper-700/80 transition-colors" />
+            <span
+              className={`absolute inset-0 rounded-full transition-colors duration-500 ${
+                onDark
+                  ? "ring-1 ring-cream/40 group-hover:ring-cream/70"
+                  : "ring-1 ring-copper-400/60 group-hover:ring-copper-700/80"
+              }`}
+            />
             <Image
               src="/images/lash-bar-wake-forest-logo.png"
               alt="Lash Bar Wake Forest"
               width={120}
               height={120}
-              className="absolute inset-1.5 w-[calc(100%-12px)] h-[calc(100%-12px)] object-contain transition-transform duration-700 group-hover:rotate-[-6deg]"
+              className={`absolute inset-1.5 w-[calc(100%-12px)] h-[calc(100%-12px)] object-contain transition-all duration-700 group-hover:rotate-[-6deg] ${
+                onDark ? "[filter:brightness(0)_invert(1)_opacity(0.92)]" : ""
+              }`}
               priority
             />
           </span>
-          <span className="font-display text-[20px] sm:text-[24px] tracking-[-0.01em] text-copper-800 leading-tight">
+          <span
+            className={`font-display text-[20px] sm:text-[24px] tracking-[-0.01em] leading-tight transition-colors duration-500 ${
+              onDark ? "text-cream" : "text-copper-800"
+            }`}
+          >
             Lash Bar
             <span className="hidden sm:inline"> Wake Forest</span>
           </span>
@@ -106,9 +131,17 @@ export default function Header() {
             href={BOOK_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-pill"
+            className={`btn-pill transition-all duration-500 ${
+              onDark
+                ? "!bg-cream/12 !text-cream backdrop-blur-md"
+                : ""
+            }`}
           >
-            <span className="petal-bg">
+            <span
+              className={`petal-bg transition-colors duration-500 ${
+                onDark ? "!bg-cream !text-copper-900" : ""
+              }`}
+            >
               <Petal />
             </span>
             Book Appointment
@@ -118,7 +151,11 @@ export default function Header() {
         <button
           aria-label="Open menu"
           aria-expanded={open}
-          className="lg:hidden justify-self-end w-11 h-11 grid place-items-center rounded-full border border-rule text-ink hover:border-copper-500 transition"
+          className={`lg:hidden justify-self-end w-11 h-11 grid place-items-center rounded-full transition-all duration-500 ${
+            onDark
+              ? "border border-cream/40 text-cream hover:border-cream/80"
+              : "border border-rule text-ink hover:border-copper-500"
+          }`}
           onClick={() => setOpen((v) => !v)}
           type="button"
         >
