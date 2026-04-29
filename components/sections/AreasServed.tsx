@@ -10,6 +10,15 @@ const AREAS = [
   "Forestville",
 ];
 
+function Petal({ className = "" }: { className?: string }) {
+  return (
+    <svg className={`inline-block w-3 h-3 align-middle text-copper-500 mx-3 ${className}`} viewBox="0 0 24 24" aria-hidden>
+      <path d="M12 2c1.5 3 3 4.5 6 6-3 1.5-4.5 3-6 6-1.5-3-3-4.5-6-6 3-1.5 4.5-3 6-6z" fill="currentColor" />
+      <circle cx="12" cy="12" r="1.6" fill="currentColor" />
+    </svg>
+  );
+}
+
 export default function AreasServed() {
   return (
     <section id="areas" className="relative bg-cream py-24 sm:py-32">
@@ -20,14 +29,17 @@ export default function AreasServed() {
           </h2>
           <p className="mt-7 text-ink-soft text-[16.5px] leading-[1.85] font-light max-w-md">
             The studio is on S Main Street in Wake Forest, easy off Capital
-            Boulevard. Clients come from all over the area.
+            Boulevard. Easy parking, by appointment only.
           </p>
 
-          <div className="mt-9 flex flex-wrap gap-2.5 max-w-md">
-            {AREAS.map((a) => (
-              <span key={a} className="chip">{a}</span>
+          <p className="mt-10 font-display italic text-copper-800 text-[clamp(1.4rem,2.2vw,1.85rem)] leading-[1.6] tracking-[-0.005em] max-w-lg">
+            {AREAS.map((a, i) => (
+              <span key={a}>
+                {a}
+                {i < AREAS.length - 1 && <Petal />}
+              </span>
             ))}
-          </div>
+          </p>
         </div>
 
         <div className="lg:col-span-6 order-1 lg:order-2">

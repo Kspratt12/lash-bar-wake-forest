@@ -23,7 +23,7 @@ const SLIDES: Slide[] = [
   { src: "/images/photo-15.png", alt: "Inside the studio", caption: "Wake Forest" },
 ];
 
-const AUTOPLAY_MS = 4500;
+const AUTOPLAY_MS = 8000;
 
 export default function Lookbook() {
   const trackRef = useRef<HTMLDivElement>(null);
@@ -126,10 +126,7 @@ export default function Lookbook() {
       <div className="max-w-[1300px] mx-auto px-5 sm:px-8">
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-12">
           <div>
-            <div className="text-[11px] tracking-[0.4em] uppercase text-noir/55 font-medium">
-              No. 01 / The Lookbook
-            </div>
-            <h2 className="mt-5 font-display text-[clamp(2.4rem,5vw,4.6rem)] leading-[1.02] tracking-[-0.025em] font-medium max-w-2xl">
+            <h2 className="font-display text-[clamp(2.4rem,5vw,4.6rem)] leading-[1.02] tracking-[-0.025em] font-medium max-w-2xl">
               Recent work.
             </h2>
           </div>
@@ -210,18 +207,18 @@ export default function Lookbook() {
         </div>
       </div>
 
-      <div className="max-w-[1300px] mx-auto px-5 sm:px-8 mt-10 flex items-center justify-center gap-1.5">
-        {SLIDES.map((_, i) => (
-          <button
-            key={i}
-            type="button"
-            aria-label={`Go to slide ${i + 1}`}
-            onClick={() => goTo(i)}
-            className={`h-[2px] rounded-full transition-all ${
-              i === active ? "w-10 bg-noir" : "w-3 bg-noir/20 hover:bg-noir/45"
-            }`}
+      <div className="max-w-[1300px] mx-auto px-5 sm:px-8 mt-10">
+        <button
+          type="button"
+          aria-label="Lookbook progress"
+          onClick={() => goTo((active + 1) % SLIDES.length)}
+          className="block w-full h-px bg-noir/15 relative overflow-hidden"
+        >
+          <span
+            className="absolute inset-y-0 left-0 bg-noir transition-all duration-700 ease-[cubic-bezier(0.2,0.7,0.2,1)]"
+            style={{ width: `${((active + 1) / SLIDES.length) * 100}%` }}
           />
-        ))}
+        </button>
       </div>
     </section>
   );

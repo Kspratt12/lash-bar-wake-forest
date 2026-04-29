@@ -2,6 +2,40 @@
 
 import { useEffect, useRef, useState } from "react";
 
+export function ScrollProgress() {
+  const ref = useRef<HTMLSpanElement>(null);
+  useEffect(() => {
+    let raf = 0;
+    const tick = () => {
+      const el = ref.current;
+      if (el) {
+        const h = document.documentElement;
+        const max = h.scrollHeight - h.clientHeight;
+        const p = max > 0 ? (h.scrollTop / max) * 100 : 0;
+        el.style.setProperty("--p", `${p}%`);
+      }
+      raf = 0;
+    };
+    const onScroll = () => {
+      if (raf) return;
+      raf = requestAnimationFrame(tick);
+    };
+    tick();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", tick);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", tick);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
+  return (
+    <div className="scroll-progress" aria-hidden>
+      <span ref={ref} />
+    </div>
+  );
+}
+
 export function MagneticInit() {
   useEffect(() => {
     const isCoarse =

@@ -8,12 +8,18 @@ export default function Owner() {
     <section className="relative bg-cream2 py-24 sm:py-32">
       <div className="max-w-[1300px] mx-auto px-5 sm:px-8 grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
         <div className="lg:col-span-5 order-2 lg:order-1">
-          <div className="text-[12px] tracking-[0.32em] uppercase text-copper-700 font-medium">
-            The owner
-          </div>
-          <h2 className="mt-4 font-display text-[clamp(2.4rem,4.6vw,4rem)] leading-[1.04] tracking-[-0.02em] font-medium text-copper-900">
+          <h2 className="font-display text-[clamp(2.4rem,4.6vw,4rem)] leading-[1.04] tracking-[-0.02em] font-medium text-copper-900">
             Hi, I&rsquo;m Julia.
           </h2>
+          <div className="mt-4 flex items-center gap-3 text-copper-700">
+            <span className="font-display italic text-[19px] tracking-[-0.005em]">
+              Owner &amp; lash artist
+            </span>
+            <span className="w-6 h-px bg-copper-400" />
+            <span className="text-[11px] tracking-[0.32em] uppercase font-medium text-ink-soft">
+              Wake Forest, NC
+            </span>
+          </div>
           <p className="mt-7 text-ink-soft text-[16.5px] leading-[1.85] font-light max-w-md">
             I opened Lash Bar Wake Forest because I wanted a quieter space.
             Not a salon. Not a chain. Just one chair, one client, and the kind

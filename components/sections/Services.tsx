@@ -33,13 +33,10 @@ export default function Services() {
 
       <div className="relative max-w-[1400px] mx-auto px-5 sm:px-10 grid lg:grid-cols-12 gap-10 lg:gap-16 items-stretch">
         <Reveal className="lg:col-span-5 flex flex-col">
-          <div className="text-[11px] tracking-[0.4em] uppercase text-cardtan font-medium">
-            No. 02 / The Approach
-          </div>
-          <h2 className="mt-6 font-display text-[clamp(2.6rem,5.4vw,5.4rem)] leading-[0.98] tracking-[-0.025em] font-medium">
+          <h2 className="font-display text-[clamp(2.6rem,5.4vw,5.4rem)] leading-[0.98] tracking-[-0.025em] font-medium">
             A small studio.
             <br />
-            <span className="italic font-light">A lot of detail.</span>
+            A lot of detail.
           </h2>
 
           <div className="mt-auto pt-12">
@@ -51,11 +48,6 @@ export default function Services() {
                 sizes="(max-width: 1024px) 100vw, 480px"
                 className="object-cover transition-transform duration-[1200ms] hover:scale-[1.04]"
               />
-              <div className="absolute inset-x-0 bottom-0 p-5 bg-gradient-to-t from-noir/85 to-transparent">
-                <div className="text-[10px] tracking-[0.4em] uppercase text-bone/65 font-medium">
-                  On the chair
-                </div>
-              </div>
             </div>
           </div>
         </Reveal>

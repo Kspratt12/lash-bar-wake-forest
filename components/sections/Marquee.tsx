@@ -2,6 +2,9 @@ const PHRASES = [
   "Soft life starts with effortless beauty",
   "Wake up. Skip the mascara.",
   "Wake Forest, NC",
+  "By appointment only",
+  "Hand-mapped sets",
+  "2000 S Main Street",
 ];
 
 function Petal() {
@@ -14,7 +17,7 @@ function Petal() {
 }
 
 export default function Marquee() {
-  const repeated = [...PHRASES, ...PHRASES, ...PHRASES, ...PHRASES, ...PHRASES, ...PHRASES];
+  const repeated = [...PHRASES, ...PHRASES, ...PHRASES];
   return (
     <section className="bg-copper-900 text-cream py-8 overflow-hidden border-y border-copper-800/40">
       <div className="flex whitespace-nowrap animate-marquee will-change-transform">

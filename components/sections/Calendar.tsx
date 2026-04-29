@@ -122,14 +122,11 @@ export default function Calendar() {
       <div className="relative max-w-[1300px] mx-auto px-5 sm:px-8">
         <Reveal className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-12">
           <div>
-            <div className="text-[12px] tracking-[0.32em] uppercase text-cardtan font-medium">
-              The Calendar
-            </div>
-            <h2 className="mt-4 font-display text-[clamp(2.4rem,4.8vw,4.4rem)] leading-[1.02] tracking-[-0.025em] font-medium max-w-2xl">
-              This week at the studio.
+            <h2 className="font-display text-[clamp(2.4rem,4.8vw,4.4rem)] leading-[1.02] tracking-[-0.025em] font-medium max-w-2xl">
+              How a typical week looks.
             </h2>
             <p className="mt-4 text-cream/70 text-[15.5px] font-light max-w-md">
-              A preview of a typical week. Tap any time to reserve live on Square.
+              A preview of the rhythm. Real availability lives on Square.
             </p>
           </div>
           <a

@@ -1,5 +1,5 @@
 import Header from "@/components/Header";
-import { FilmGrain, MagneticInit } from "@/components/Atmosphere";
+import { FilmGrain, MagneticInit, ScrollProgress } from "@/components/Atmosphere";
 import Hero from "@/components/sections/Hero";
 import Marquee from "@/components/sections/Marquee";
 import Lookbook from "@/components/sections/Lookbook";
@@ -17,6 +17,7 @@ import Footer from "@/components/sections/Footer";
 export default function Home() {
   return (
     <main className="min-h-screen">
+      <ScrollProgress />
       <FilmGrain />
       <MagneticInit />
       <Header />

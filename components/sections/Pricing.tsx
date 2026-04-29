@@ -24,7 +24,7 @@ const TIERS: Tier[] = [
     popular: true,
   },
   {
-    title: "Coming In Hot",
+    title: "Welcome Set",
     price: "100",
     note: "Foreign fill",
     features: ["Refresh of another studio's set", "Honest lash health read", "Welcome kit"],
@@ -71,8 +71,9 @@ export default function Pricing() {
               <ul className="space-y-3 flex-1">
                 {t.features.map((f) => (
                   <li key={f} className="flex items-start gap-3 text-[14.5px] font-light">
-                    <svg className={`mt-[3px] shrink-0 ${t.popular ? "text-cardtan" : "text-copper-500"}`} width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <polyline points="20 6 9 17 4 12" />
+                    <svg className={`mt-[5px] shrink-0 ${t.popular ? "text-cardtan" : "text-copper-500"}`} width="11" height="11" viewBox="0 0 24 24" aria-hidden>
+                      <path d="M12 2c1.5 3 3 4.5 6 6-3 1.5-4.5 3-6 6-1.5-3-3-4.5-6-6 3-1.5 4.5-3 6-6z" fill="currentColor" />
+                      <circle cx="12" cy="12" r="1.6" fill="currentColor" />
                     </svg>
                     <span>{f}</span>
                   </li>
