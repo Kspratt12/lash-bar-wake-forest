@@ -9,16 +9,29 @@ const BOOK_URL =
 
 const NAV = [
   { label: "Home", href: "#home" },
-  { label: "Services", href: "#services" },
-  { label: "Lookbook", href: "#lookbook" },
-  { label: "Pricing", href: "#pricing" },
   { label: "About", href: "#about" },
+  { label: "Services", href: "#services" },
   { label: "Contact", href: "#contact" },
 ];
+
+function Petal({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      className={`petal-icon ${className}`}
+      viewBox="0 0 24 24"
+      fill="none"
+      aria-hidden
+    >
+      <path d="M12 2c1.5 3 3 4.5 6 6-3 1.5-4.5 3-6 6-1.5-3-3-4.5-6-6 3-1.5 4.5-3 6-6z" />
+      <circle cx="12" cy="12" r="1.6" fill="currentColor" />
+    </svg>
+  );
+}
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [active, setActive] = useState("#home");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -27,51 +40,81 @@ export default function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    const ids = NAV.map((n) => n.href.slice(1));
+    const obs = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible) setActive(`#${visible.target.id}`);
+      },
+      { threshold: [0.4], rootMargin: "-96px 0px -40% 0px" }
+    );
+    ids.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) obs.observe(el);
+    });
+    return () => obs.disconnect();
+  }, []);
+
   return (
     <header
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-cream/92 backdrop-blur-xl shadow-[0_1px_0_0_rgba(229,217,197,0.7)]"
+          ? "bg-cream/92 backdrop-blur-xl shadow-[0_1px_0_0_rgba(220,201,172,0.6)]"
           : "bg-transparent"
       }`}
     >
-      <div className="max-w-[1400px] mx-auto px-6 sm:px-10 h-20 sm:h-24 flex items-center justify-between">
-        <Link href="#home" className="flex items-center gap-3.5 group" aria-label="Lash Bar Wake Forest home">
-          <Image
-            src="/images/lash-bar-wake-forest-logo.png"
-            alt="Lash Bar Wake Forest"
-            width={120}
-            height={120}
-            className="w-14 h-14 sm:w-16 sm:h-16 object-contain transition-transform duration-500 group-hover:rotate-[8deg]"
-            priority
-          />
-          <span className="hidden sm:inline-block text-[10px] tracking-[0.42em] font-medium uppercase text-copper-700">
-            Wake&nbsp;Forest, NC
-          </span>
-        </Link>
-
-        <nav className="hidden lg:flex items-center gap-10">
+      <div className="max-w-[1500px] mx-auto px-5 sm:px-8 h-20 sm:h-24 grid grid-cols-[auto_1fr_auto] sm:grid-cols-3 items-center gap-4">
+        <nav className="hidden lg:flex items-center gap-1.5">
           {NAV.map((item) => (
             <a
               key={item.href}
               href={item.href}
-              className="text-[11px] tracking-[0.3em] font-medium text-ink/75 hover:text-copper-700 uppercase transition-colors"
+              className={`px-4 py-2 rounded-full text-[13px] font-medium transition-colors ${
+                active === item.href
+                  ? "bg-cardtan text-copper-700"
+                  : "text-ink-soft hover:text-copper-700"
+              }`}
             >
               {item.label}
             </a>
           ))}
         </nav>
 
-        <div className="hidden lg:block">
-          <a href={BOOK_URL} target="_blank" rel="noopener noreferrer" className="btn-primary">
-            Book Now
+        <Link href="#home" className="flex items-center justify-self-start lg:justify-self-center gap-2.5" aria-label="Lash Bar Wake Forest home">
+          <Image
+            src="/images/lash-bar-wake-forest-logo.png"
+            alt="Lash Bar Wake Forest"
+            width={120}
+            height={120}
+            className="w-11 h-11 sm:w-12 sm:h-12 object-contain"
+            priority
+          />
+          <span className="font-display text-[22px] sm:text-[26px] tracking-[-0.01em] text-copper-800">
+            Lash Bar
+          </span>
+        </Link>
+
+        <div className="hidden lg:block justify-self-end">
+          <a
+            href={BOOK_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-pill"
+          >
+            <span className="petal-bg">
+              <Petal />
+            </span>
+            Book Appointment
           </a>
         </div>
 
         <button
           aria-label="Open menu"
           aria-expanded={open}
-          className="lg:hidden w-11 h-11 grid place-items-center rounded-full border border-rule text-ink hover:border-copper-500 transition"
+          className="lg:hidden justify-self-end w-11 h-11 grid place-items-center rounded-full border border-rule text-ink hover:border-copper-500 transition"
           onClick={() => setOpen((v) => !v)}
           type="button"
         >
@@ -95,7 +138,7 @@ export default function Header() {
                 key={item.href}
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className="text-[12px] tracking-[0.3em] font-medium uppercase text-ink/85"
+                className="text-[15px] font-medium text-ink/85"
               >
                 {item.label}
               </a>
@@ -104,10 +147,13 @@ export default function Header() {
               href={BOOK_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-primary w-full"
+              className="btn-pill w-full justify-start"
               onClick={() => setOpen(false)}
             >
-              Book Now
+              <span className="petal-bg">
+                <Petal />
+              </span>
+              Book Appointment
             </a>
           </div>
         </div>

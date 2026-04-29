@@ -8,24 +8,27 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Warm copper / rose-gold palette pulled from the Lash Bar logo
+        // Warm Dermato-inspired palette pulled from the Lash Bar logo
         copper: {
-          50: "#FBF6EE",
-          100: "#F4EBDC",
-          200: "#E8D5B7",
-          300: "#D9B98C",
-          400: "#C89968",
-          500: "#B8895B",
-          600: "#9F7148",
-          700: "#7E5836",
-          800: "#5C3F26",
-          900: "#3D2917",
+          50: "#F8EFE0",
+          100: "#F0E2CE",
+          200: "#EAD7BD",
+          300: "#DCC09A",
+          400: "#C8A574",
+          500: "#B08856",
+          600: "#8B6840",
+          700: "#6B4F32",
+          800: "#4A3624",
+          900: "#2D2014",
         },
-        cream: "#FBF6EE",
-        cream2: "#F4EBDC",
-        ink: "#2A1F15",
-        muted: "#7A6856",
-        rule: "#E5D9C5",
+        cream: "#F5EDE2",
+        cream2: "#EFE4D2",
+        cardtan: "#EAD7BD",
+        cardcream: "#F0E2CE",
+        ink: "#2D2014",
+        "ink-soft": "#6B4F32",
+        muted: "#8A7560",
+        rule: "#DCC9AC",
       },
       fontFamily: {
         display: ["var(--font-display)", "Cormorant Garamond", "Georgia", "serif"],

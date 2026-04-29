@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Hero from "@/components/sections/Hero";
+import Bento from "@/components/sections/Bento";
 import About from "@/components/sections/About";
 import MeetArtist from "@/components/sections/MeetArtist";
 import Experience from "@/components/sections/Experience";
@@ -19,6 +20,7 @@ export default function Home() {
     <main className="min-h-screen">
       <Header />
       <Hero />
+      <Bento />
       <About />
       <MeetArtist />
       <Experience />
