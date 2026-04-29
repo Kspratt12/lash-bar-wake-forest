@@ -19,7 +19,7 @@ export default function Schedule() {
           <h2 className="font-display text-[clamp(2.2rem,4.4vw,4rem)] leading-[1.04] tracking-[-0.02em] font-medium text-copper-900 max-w-2xl">
             Full service menu.
           </h2>
-          <a href={BOOK_URL} target="_blank" rel="noopener noreferrer" className="btn-primary self-start sm:self-end">
+          <a href={BOOK_URL} target="_blank" rel="noopener noreferrer" className="btn-primary magnetic self-start sm:self-end">
             Open Calendar
           </a>
         </div>

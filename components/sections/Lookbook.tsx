@@ -7,27 +7,27 @@ type Slide = {
   src: string;
   alt: string;
   caption: string;
-  meta: string;
 };
 
 const SLIDES: Slide[] = [
-  { src: "/images/photo-2.png", alt: "Classic lash extension look", caption: "Soft Classic", meta: "Natural · Everyday wear" },
-  { src: "/images/photo-4.png", alt: "Hybrid lash set", caption: "Hybrid", meta: "Texture · Definition" },
-  { src: "/images/photo-5.png", alt: "Volume lash set", caption: "Volume", meta: "Density · Statement" },
-  { src: "/images/photo-6.png", alt: "Soft natural lash set", caption: "Wispy", meta: "Romantic · Light fan" },
-  { src: "/images/photo-8.png", alt: "Custom lash mapping", caption: "Doll Eye", meta: "Open · Lifted" },
-  { src: "/images/side.png", alt: "Close-up of a finished lash set", caption: "Up Close", meta: "On-the-chair detail" },
-  { src: "/images/photo-10.png", alt: "Studio detail", caption: "Studio", meta: "On the chair" },
-  { src: "/images/photo-11.png", alt: "Lash artist detail", caption: "Cat Eye", meta: "Elongated · Lifted outer" },
-  { src: "/images/photo-13.png", alt: "Studio detail shot", caption: "Atelier", meta: "Inside the studio" },
-  { src: "/images/photo-14.png", alt: "Hand-applied volume set", caption: "Volume Glam", meta: "Event-ready" },
-  { src: "/images/photo-15.png", alt: "Boutique studio interior", caption: "Inside the Bar", meta: "Wake Forest, NC" },
+  { src: "/images/photo-2.png", alt: "Soft classic lash extension look", caption: "Classic" },
+  { src: "/images/photo-4.png", alt: "Hybrid lash set", caption: "Hybrid" },
+  { src: "/images/photo-5.png", alt: "Volume lash set", caption: "Volume" },
+  { src: "/images/photo-6.png", alt: "Wispy lash set", caption: "Wispy" },
+  { src: "/images/photo-8.png", alt: "Doll-eye lash set", caption: "Doll Eye" },
+  { src: "/images/side.png", alt: "Close-up of a finished set", caption: "Up Close" },
+  { src: "/images/photo-10.png", alt: "Studio detail", caption: "Studio" },
+  { src: "/images/photo-11.png", alt: "Cat-eye lash set", caption: "Cat Eye" },
+  { src: "/images/photo-13.png", alt: "Studio detail", caption: "Atelier" },
+  { src: "/images/photo-14.png", alt: "Volume glam set", caption: "Glam" },
+  { src: "/images/photo-15.png", alt: "Inside the studio", caption: "Wake Forest" },
 ];
 
 const AUTOPLAY_MS = 4500;
 
 export default function Lookbook() {
   const trackRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
 
@@ -36,7 +36,7 @@ export default function Lookbook() {
     if (!el) return 0;
     const slideEl = el.querySelector<HTMLElement>("[data-slide]");
     if (!slideEl) return el.clientWidth;
-    return slideEl.offsetWidth + 16; // slide + gap-4
+    return slideEl.offsetWidth + 16;
   }, []);
 
   const updateActive = useCallback(() => {
@@ -60,7 +60,6 @@ export default function Lookbook() {
     };
   }, [updateActive]);
 
-  // Auto-rotate
   useEffect(() => {
     if (paused) return;
     const id = setInterval(() => {
@@ -77,7 +76,34 @@ export default function Lookbook() {
     return () => clearInterval(id);
   }, [paused, getSlideStep]);
 
-  const scrollBy = (dir: 1 | -1) => {
+  // Vertical parallax on photos as the section scrolls through the viewport
+  useEffect(() => {
+    const sec = sectionRef.current;
+    if (!sec) return;
+    let raf = 0;
+    const tick = () => {
+      const r = sec.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const progress = Math.min(1, Math.max(0, 1 - (r.top + r.height) / (vh + r.height)));
+      const offset = (progress - 0.5) * 60; // -30..+30 px
+      sec.querySelectorAll<HTMLElement>("[data-parallax]").forEach((el) => {
+        el.style.transform = `translate3d(0, ${offset}px, 0)`;
+      });
+      raf = 0;
+    };
+    const onScroll = () => {
+      if (raf) return;
+      raf = requestAnimationFrame(tick);
+    };
+    tick();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
+
+  const scrollByOne = (dir: 1 | -1) => {
     const el = trackRef.current;
     if (!el) return;
     el.scrollBy({ left: dir * getSlideStep(), behavior: "smooth" });
@@ -93,7 +119,11 @@ export default function Lookbook() {
   const canNext = active < SLIDES.length - 1;
 
   return (
-    <section id="lookbook" className="relative bg-copper-900 text-cream py-24 sm:py-32 overflow-hidden">
+    <section
+      id="lookbook"
+      ref={sectionRef}
+      className="relative bg-copper-900 text-cream py-24 sm:py-32 overflow-hidden"
+    >
       <div className="max-w-[1300px] mx-auto px-5 sm:px-8">
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-12">
           <div>
@@ -112,7 +142,7 @@ export default function Lookbook() {
             <button
               type="button"
               aria-label="Previous"
-              onClick={() => scrollBy(-1)}
+              onClick={() => scrollByOne(-1)}
               disabled={!canPrev}
               className={`w-11 h-11 rounded-full grid place-items-center transition-all ${
                 canPrev
@@ -127,7 +157,7 @@ export default function Lookbook() {
             <button
               type="button"
               aria-label="Next"
-              onClick={() => scrollBy(1)}
+              onClick={() => scrollByOne(1)}
               disabled={!canNext}
               className={`w-11 h-11 rounded-full grid place-items-center transition-all ${
                 canNext
@@ -157,25 +187,22 @@ export default function Lookbook() {
               data-slide
               className="snap-start shrink-0 w-[78vw] sm:w-[58vw] md:w-[44vw] lg:w-[32vw] xl:w-[28vw] max-w-[460px] group"
             >
-              <div className="relative aspect-[4/5] rounded-[24px] overflow-hidden bg-cardcream/15">
-                <Image
-                  src={s.src}
-                  alt={s.alt}
-                  fill
-                  sizes="(max-width: 640px) 78vw, (max-width: 1024px) 44vw, 30vw"
-                  className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                />
-                <div className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-3">
-                  <div className="bg-cream/90 backdrop-blur-md rounded-2xl px-5 py-3.5 max-w-[75%]">
-                    <div className="font-display text-[18px] tracking-[-0.005em] text-copper-900 leading-tight">
-                      {s.caption}
-                    </div>
-                    <div className="text-[11px] tracking-[0.18em] uppercase text-ink-soft mt-1 font-medium">
-                      {s.meta}
-                    </div>
+              <div className="relative aspect-[4/5] rounded-[24px] overflow-hidden bg-cream/[0.06]">
+                <div data-parallax className="absolute inset-0 will-change-transform">
+                  <Image
+                    src={s.src}
+                    alt={s.alt}
+                    fill
+                    sizes="(max-width: 640px) 78vw, (max-width: 1024px) 44vw, 30vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                  />
+                </div>
+                <div className="absolute inset-x-5 bottom-5 flex items-end justify-between gap-3 pointer-events-none">
+                  <div className="font-display italic text-cream text-[22px] tracking-[-0.005em] drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]">
+                    {s.caption}
                   </div>
-                  <div className="font-display italic text-cream text-[14px] bg-copper-900/65 backdrop-blur-md px-3 py-1.5 rounded-full tabular-nums">
-                    {String(i + 1).padStart(2, "0")}
+                  <div className="font-display text-cream/70 text-[12px] tabular-nums">
+                    {String(i + 1).padStart(2, "0")} / {String(SLIDES.length).padStart(2, "0")}
                   </div>
                 </div>
               </div>

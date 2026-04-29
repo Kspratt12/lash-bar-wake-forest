@@ -15,10 +15,10 @@ export default function Owner() {
             Hi, I&rsquo;m Julia.
           </h2>
           <p className="mt-7 text-ink-soft text-[16.5px] leading-[1.85] font-light max-w-md">
-            I opened Lash Bar Wake Forest because I wanted a space that felt like
-            a real exhale. Not a salon. Not a chain. Just one chair, one client,
-            and the kind of attention that gives you lashes you don&rsquo;t have
-            to fix between fills.
+            I opened Lash Bar Wake Forest because I wanted a quieter space.
+            Not a salon. Not a chain. Just one chair, one client, and the kind
+            of attention that gives you lashes you don&rsquo;t have to fix
+            between fills.
           </p>
           <p className="mt-5 text-ink-soft text-[16.5px] leading-[1.85] font-light max-w-md">
             Every set I do is mapped to your eye shape, your face, and the way
@@ -30,7 +30,7 @@ export default function Owner() {
               href={BOOK_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-primary"
+              className="btn-primary magnetic"
             >
               Book With Julia
             </a>

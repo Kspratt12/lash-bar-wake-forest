@@ -86,7 +86,7 @@ export default function Pricing() {
                 className={
                   t.popular
                     ? "mt-8 inline-flex items-center justify-center rounded-full px-5 py-3 bg-cardtan text-copper-900 text-[12px] font-medium tracking-[0.02em] hover:bg-cream transition"
-                    : "mt-8 btn-primary"
+                    : "mt-8 btn-primary magnetic"
                 }
               >
                 Book

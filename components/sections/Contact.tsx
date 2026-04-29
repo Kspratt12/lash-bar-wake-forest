@@ -90,7 +90,7 @@ export default function Contact() {
               </div>
             </div>
 
-            <a href={BOOK_URL} target="_blank" rel="noopener noreferrer" className="btn-primary mt-2">
+            <a href={BOOK_URL} target="_blank" rel="noopener noreferrer" className="btn-primary magnetic mt-2">
               Book Appointment
             </a>
           </div>

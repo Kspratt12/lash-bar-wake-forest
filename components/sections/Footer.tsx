@@ -21,8 +21,8 @@ export default function Footer() {
             </div>
           </div>
           <p className="mt-6 text-[15px] leading-[1.75] font-light text-cream/65 max-w-sm">
-            A small lash studio in Wake Forest. Custom-mapped sets, real
-            retention, an hour you actually look forward to.
+            A small lash studio in Wake Forest. Custom-mapped sets, retention
+            that holds, an hour you actually look forward to.
           </p>
         </div>
 
@@ -50,7 +50,7 @@ export default function Footer() {
             <li><a href="https://www.instagram.com/lashbarwakeforest/" target="_blank" rel="noopener noreferrer" className="hover:text-cream transition">Instagram</a></li>
             <li><a href="https://www.facebook.com/lashbarwakeforest/" target="_blank" rel="noopener noreferrer" className="hover:text-cream transition">Facebook</a></li>
           </ul>
-          <a href={BOOK_URL} target="_blank" rel="noopener noreferrer" className="btn-primary mt-7">
+          <a href={BOOK_URL} target="_blank" rel="noopener noreferrer" className="btn-primary magnetic mt-7">
             Book Appointment
           </a>
         </div>

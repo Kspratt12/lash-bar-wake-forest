@@ -83,7 +83,7 @@ export default function Hero() {
     >
       <div className="relative rounded-[36px] sm:rounded-[40px] overflow-hidden min-h-[88svh] sm:min-h-[92svh] flex flex-col">
         <video
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover video-kenburns"
           src="/videos/hero.mp4"
           autoPlay
           muted

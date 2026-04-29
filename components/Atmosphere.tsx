@@ -2,6 +2,50 @@
 
 import { useEffect, useRef, useState } from "react";
 
+export function MagneticInit() {
+  useEffect(() => {
+    const isCoarse =
+      typeof window !== "undefined" &&
+      window.matchMedia("(pointer: coarse)").matches;
+    if (isCoarse) return;
+
+    const STR = 0.18;
+    const RANGE = 80;
+
+    const onMove = (e: PointerEvent) => {
+      const els = document.querySelectorAll<HTMLElement>(".magnetic");
+      els.forEach((el) => {
+        const r = el.getBoundingClientRect();
+        const cx = r.left + r.width / 2;
+        const cy = r.top + r.height / 2;
+        const within =
+          e.clientX > r.left - RANGE &&
+          e.clientX < r.right + RANGE &&
+          e.clientY > r.top - RANGE &&
+          e.clientY < r.bottom + RANGE;
+        if (within) {
+          el.style.transform = `translate(${(e.clientX - cx) * STR}px, ${(e.clientY - cy) * STR}px)`;
+        } else if (el.style.transform) {
+          el.style.transform = "translate(0, 0)";
+        }
+      });
+    };
+
+    const reset = () => {
+      const els = document.querySelectorAll<HTMLElement>(".magnetic");
+      els.forEach((el) => (el.style.transform = "translate(0, 0)"));
+    };
+
+    window.addEventListener("pointermove", onMove);
+    window.addEventListener("pointerleave", reset);
+    return () => {
+      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerleave", reset);
+    };
+  }, []);
+  return null;
+}
+
 export function FilmGrain() {
   return (
     <div
