@@ -247,6 +247,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${cormorant.variable} ${inter.variable}`}>
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link rel="preconnect" href="https://book.squareup.com" />
+        <link rel="dns-prefetch" href="https://www.google.com" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
@@ -254,6 +258,46 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: "Lash Bar Wake Forest",
+              url: "https://lashbarwakeforest.com",
+              inLanguage: "en-US",
+              publisher: { "@id": "https://lashbarwakeforest.com/#business" },
+            }),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "@id": "https://lashbarwakeforest.com/#org",
+              name: "Lash Bar Wake Forest",
+              url: "https://lashbarwakeforest.com",
+              logo: "https://lashbarwakeforest.com/images/lash-bar-wake-forest-logo.png",
+              sameAs: [
+                "https://www.instagram.com/lashbarwakeforest/",
+                "https://www.facebook.com/lashbarwakeforest/",
+              ],
+              contactPoint: [
+                {
+                  "@type": "ContactPoint",
+                  telephone: "+1-720-402-9075",
+                  contactType: "reservations",
+                  email: "Lashbarwakeforest@gmail.com",
+                  areaServed: "US-NC",
+                  availableLanguage: ["English"],
+                },
+              ],
+            }),
+          }}
         />
       </head>
       <body className="bg-cream text-ink font-body antialiased">

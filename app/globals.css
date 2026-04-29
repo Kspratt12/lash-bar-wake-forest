@@ -366,7 +366,10 @@ section[id] { scroll-margin-top: 96px; }
 /* Lookbook rail: first slide flush-left to the page padding, no awkward center peek */
 .lookbook-rail {
   padding-left: max(20px, calc((100vw - 1300px) / 2 + 32px));
-  padding-right: max(40vw, calc((100vw - 1300px) / 2 + 32px));
+  padding-right: max(20vw, calc((100vw - 1300px) / 2 + 32px));
+}
+@media (min-width: 1024px) {
+  .lookbook-rail { padding-right: max(40vw, calc((100vw - 1300px) / 2 + 32px)); }
 }
 
 /* Custom cursor */

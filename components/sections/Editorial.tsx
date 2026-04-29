@@ -37,7 +37,7 @@ export default function Editorial() {
     >
       <div data-bg className="absolute inset-[-8%] will-change-transform">
         <Image
-          src="/images/essential.png"
+          src="/images/lashes.png"
           alt=""
           fill
           sizes="100vw"
