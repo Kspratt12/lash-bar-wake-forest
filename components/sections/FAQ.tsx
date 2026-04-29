@@ -1,3 +1,7 @@
+"use client";
+
+import { useState } from "react";
+
 const BOOK_URL =
   "https://book.squareup.com/appointments/mgcls009iy8isa/location/L5GD315DBCWK3/services";
 
@@ -10,7 +14,7 @@ const FAQS: QA[] = [
   },
   {
     q: "How long does my appointment take?",
-    a: "About an hour for a fill. Plan for around 75–90 minutes for your first full set so we can map your eye shape carefully.",
+    a: "About an hour for a fill. Plan for around 75 to 90 minutes for your first full set so we can map your eye shape carefully.",
   },
   {
     q: "How long do the lashes last?",
@@ -34,39 +38,64 @@ const FAQS: QA[] = [
   },
   {
     q: "Do you take walk-ins?",
-    a: "Lash Bar is by appointment only. You can book online through Square anytime — same-day appointments are available when the calendar allows.",
+    a: "Lash Bar is by appointment only. You can book online through Square anytime. Same-day appointments are available when the calendar allows.",
   },
 ];
 
 export default function FAQ() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
   return (
     <section id="faq" className="relative bg-cream py-24 sm:py-32">
       <div className="max-w-[1100px] mx-auto px-5 sm:px-8">
-        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-14">
-          <div>
-            <div className="text-[10px] tracking-[0.4em] uppercase text-copper-700 font-medium mb-4">
-              Before you book
-            </div>
-            <h2 className="font-display text-[clamp(2.2rem,4.4vw,4rem)] leading-[1.04] tracking-[-0.02em] font-medium text-copper-900 max-w-2xl">
-              Questions, <span className="italic font-light">answered.</span>
-            </h2>
+        <div className="mb-14">
+          <div className="text-[10px] tracking-[0.4em] uppercase text-copper-700 font-medium mb-4">
+            Before you book
           </div>
+          <h2 className="font-display text-[clamp(2.2rem,4.4vw,4rem)] leading-[1.04] tracking-[-0.02em] font-medium text-copper-900 max-w-2xl">
+            Questions, <span className="italic font-light">answered.</span>
+          </h2>
         </div>
 
         <ul className="border-t border-rule">
-          {FAQS.map((item) => (
-            <li
-              key={item.q}
-              className="border-b border-rule py-7 grid sm:grid-cols-[1fr_2fr] gap-4 sm:gap-12"
-            >
-              <h3 className="font-display text-copper-900 text-[20px] sm:text-[22px] tracking-[-0.01em] leading-snug font-medium">
-                {item.q}
-              </h3>
-              <p className="text-ink-soft text-[15.5px] leading-[1.75] font-light max-w-xl">
-                {item.a}
-              </p>
-            </li>
-          ))}
+          {FAQS.map((item, i) => {
+            const isOpen = openIndex === i;
+            return (
+              <li key={item.q} className="border-b border-rule">
+                <button
+                  type="button"
+                  onClick={() => setOpenIndex(isOpen ? null : i)}
+                  aria-expanded={isOpen}
+                  className="w-full grid grid-cols-[1fr_auto] gap-6 py-7 text-left items-center group"
+                >
+                  <h3 className="font-display text-copper-900 text-[20px] sm:text-[24px] tracking-[-0.01em] leading-snug font-medium group-hover:text-copper-700 transition-colors">
+                    {item.q}
+                  </h3>
+                  <span
+                    className={`shrink-0 w-9 h-9 rounded-full grid place-items-center ring-1 ring-copper-400/50 text-copper-700 transition-all duration-300 ${
+                      isOpen ? "rotate-45 bg-copper-900 text-cream ring-copper-900" : "group-hover:ring-copper-700"
+                    }`}
+                    aria-hidden
+                  >
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
+                      <path d="M12 5v14M5 12h14" />
+                    </svg>
+                  </span>
+                </button>
+                <div
+                  className={`grid transition-[grid-template-rows,opacity] duration-400 ease-out ${
+                    isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                  }`}
+                >
+                  <div className="overflow-hidden">
+                    <p className="text-ink-soft text-[15.5px] leading-[1.8] font-light max-w-2xl pb-7 pr-12">
+                      {item.a}
+                    </p>
+                  </div>
+                </div>
+              </li>
+            );
+          })}
         </ul>
 
         <div className="mt-14 rounded-[24px] bg-cream2 ring-1 ring-rule px-7 sm:px-10 py-9 sm:py-10">
