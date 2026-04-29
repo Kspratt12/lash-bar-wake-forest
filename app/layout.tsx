@@ -164,13 +164,6 @@ const localBusinessJsonLd = {
       closes: "18:00",
     },
   ],
-  aggregateRating: {
-    "@type": "AggregateRating",
-    ratingValue: "5.0",
-    reviewCount: "6",
-    bestRating: "5",
-    worstRating: "1",
-  },
   potentialAction: {
     "@type": "ReserveAction",
     target: {
@@ -198,42 +191,66 @@ const faqJsonLd = {
   mainEntity: [
     {
       "@type": "Question",
-      name: "Where is Lash Bar Wake Forest located?",
+      name: "Will it hurt?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Lash Bar Wake Forest is located at 2000 S Main Street in Wake Forest, NC, serving clients across Wake Forest, Rolesville, Youngsville, North Raleigh, Wakefield, and Heritage.",
+        text: "No. Most clients fall asleep during the appointment. Extensions attach to your existing lash, not your skin, and the adhesive stays well clear of the eye.",
       },
     },
     {
       "@type": "Question",
-      name: "What lash extension styles do you offer in Wake Forest?",
+      name: "How long does my appointment take?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "We offer Classic, Hybrid, and Volume lash extensions, foreign fills, lash removals, cluster lashes, and a lash cluster application tutorial.",
+        text: "About an hour for a fill. Plan for around 75 to 90 minutes for your first full set so we can map your eye shape carefully.",
       },
     },
     {
       "@type": "Question",
-      name: "How much do lash extensions cost in Wake Forest?",
+      name: "How long do the lashes last?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Pricing starts at $135 for a custom-mapped Full Set with commitment for fill ins. 2-week fills are $85 and 3-week fills are $100. Removals are $50, cluster lashes $30, and a cluster tutorial is $15.",
+        text: "Lashes shed on their own natural cycle, usually over three to four weeks. Most clients book a fill every two to three weeks to keep the look full.",
       },
     },
     {
       "@type": "Question",
-      name: "How do I book an appointment at Lash Bar Wake Forest?",
+      name: "What is the difference between Classic, Hybrid, and Volume?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Booking is open through Square at book.squareup.com. Slots open weekly. You can also email Lashbarwakeforest@gmail.com or text (720) 402-9075.",
+        text: "Classic is one extension per natural lash, the most subtle look. Volume uses multiple ultra-fine extensions per lash for a fuller, softer density. Hybrid is a mix of both. We'll recommend the right style for your eye shape and lifestyle.",
       },
     },
     {
       "@type": "Question",
-      name: "Do you take clients from Rolesville, Youngsville, and North Raleigh?",
+      name: "Can I wear mascara with lash extensions?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Yes. Clients regularly travel to Lash Bar Wake Forest from Rolesville, Youngsville, North Raleigh, Wakefield, Heritage, and Forestville. The studio is on S Main Street, easy to reach off Capital Boulevard.",
+        text: "You don't need to, and please don't apply it directly to the extensions. If you want extra drama for an event, a lash-extension-safe mascara on the tips only is fine.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What if I have sensitive eyes or allergies?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "We use a sensitive-formula, lash-safe adhesive. If you have a known sensitivity to adhesive or to past sets, mention it when you book and we'll patch test before the full appointment.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "How do I take care of lash extensions at home?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Avoid oil-based products near the eyes, brush them daily with a clean spoolie, sleep on your back when you can, and never pick at them. You'll get a full aftercare guide after your first set.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Do you take walk-ins?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Lash Bar is by appointment only. You can book online through Square anytime. Same-day appointments are available when the calendar allows.",
       },
     },
   ],

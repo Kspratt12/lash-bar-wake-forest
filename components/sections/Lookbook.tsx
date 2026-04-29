@@ -10,17 +10,17 @@ type Slide = {
 };
 
 const SLIDES: Slide[] = [
-  { src: "/images/photo-2.png", alt: "Soft classic lash extension look", caption: "Classic" },
-  { src: "/images/photo-4.png", alt: "Hybrid lash set", caption: "Hybrid" },
-  { src: "/images/photo-5.png", alt: "Volume lash set", caption: "Volume" },
-  { src: "/images/photo-6.png", alt: "Wispy lash set", caption: "Wispy" },
-  { src: "/images/photo-8.png", alt: "Doll-eye lash set", caption: "Doll Eye" },
-  { src: "/images/side.png", alt: "Close-up of a finished set", caption: "Up Close" },
-  { src: "/images/photo-10.png", alt: "Studio detail", caption: "Studio" },
-  { src: "/images/photo-11.png", alt: "Cat-eye lash set", caption: "Cat Eye" },
-  { src: "/images/photo-13.png", alt: "Studio detail", caption: "Atelier" },
-  { src: "/images/photo-14.png", alt: "Volume glam set", caption: "Glam" },
-  { src: "/images/photo-15.png", alt: "Inside the studio", caption: "Wake Forest" },
+  { src: "/images/photo-2.png", alt: "Classic eyelash extensions, custom-mapped at Lash Bar Wake Forest", caption: "Classic" },
+  { src: "/images/photo-4.png", alt: "Hybrid eyelash extensions in Wake Forest, NC", caption: "Hybrid" },
+  { src: "/images/photo-5.png", alt: "Volume eyelash extensions full set, Wake Forest lash artist", caption: "Volume" },
+  { src: "/images/photo-6.png", alt: "Wispy lash extensions set at Lash Bar Wake Forest", caption: "Wispy" },
+  { src: "/images/photo-8.png", alt: "Doll-eye lash extension mapping, Wake Forest NC", caption: "Doll Eye" },
+  { src: "/images/side.png", alt: "Close-up of finished lash extensions in Wake Forest", caption: "Up Close" },
+  { src: "/images/photo-10.png", alt: "Lash Bar Wake Forest private studio", caption: "Studio" },
+  { src: "/images/photo-11.png", alt: "Cat-eye lash extensions, Wake Forest lash artist", caption: "Cat Eye" },
+  { src: "/images/photo-13.png", alt: "Lash extension studio interior, Wake Forest NC", caption: "Atelier" },
+  { src: "/images/photo-14.png", alt: "Volume glam eyelash extension set in Wake Forest", caption: "Glam" },
+  { src: "/images/photo-15.png", alt: "Lash Bar Wake Forest studio on S Main Street", caption: "Wake Forest" },
 ];
 
 const AUTOPLAY_MS = 8000;
