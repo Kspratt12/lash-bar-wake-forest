@@ -36,7 +36,7 @@ export default function Pricing() {
     <section id="pricing" className="relative bg-cream2 py-24 sm:py-32">
       <div className="max-w-[1300px] mx-auto px-5 sm:px-8">
         <h2 className="font-display text-[clamp(2.2rem,4.4vw,4rem)] leading-[1.04] tracking-[-0.02em] font-medium text-copper-900 max-w-3xl">
-          Three ways to <span className="script-italic">get started.</span>
+          Three ways to get started.
         </h2>
 
         <div className="mt-16 grid md:grid-cols-3 gap-5 items-stretch">

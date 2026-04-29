@@ -124,7 +124,7 @@ export default function Calendar() {
               The Calendar
             </div>
             <h2 className="mt-4 font-display text-[clamp(2.4rem,4.8vw,4.4rem)] leading-[1.02] tracking-[-0.025em] font-medium max-w-2xl">
-              This week at <span className="script-italic is-light">Lash Bar.</span>
+              This week at the studio.
             </h2>
             <p className="mt-4 text-cream/70 text-[15.5px] font-light max-w-md">
               Live availability through Square. Tap a time to reserve.

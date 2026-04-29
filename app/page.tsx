@@ -1,4 +1,5 @@
 import Header from "@/components/Header";
+import { Cursor, FilmGrain } from "@/components/Atmosphere";
 import Hero from "@/components/sections/Hero";
 import Marquee from "@/components/sections/Marquee";
 import Bento from "@/components/sections/Bento";
@@ -9,15 +10,16 @@ import Schedule from "@/components/sections/Schedule";
 import Services from "@/components/sections/Services";
 import Pricing from "@/components/sections/Pricing";
 import Lookbook from "@/components/sections/Lookbook";
-import PullQuote from "@/components/sections/PullQuote";
+import Contact from "@/components/sections/Contact";
 import Testimonials from "@/components/sections/Testimonials";
 import AreasServed from "@/components/sections/AreasServed";
-import Contact from "@/components/sections/Contact";
 import Footer from "@/components/sections/Footer";
 
 export default function Home() {
   return (
     <main className="min-h-screen">
+      <FilmGrain />
+      <Cursor />
       <Header />
       <Hero />
       <Marquee />
@@ -29,10 +31,9 @@ export default function Home() {
       <Schedule />
       <Pricing />
       <Lookbook />
-      <PullQuote />
+      <Contact />
       <Testimonials />
       <AreasServed />
-      <Contact />
       <Footer />
     </main>
   );

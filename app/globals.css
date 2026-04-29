@@ -334,3 +334,44 @@ section[id] { scroll-margin-top: 96px; }
 
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Lookbook rail: first slide flush-left to the page padding, no awkward center peek */
+.lookbook-rail {
+  padding-left: max(20px, calc((100vw - 1300px) / 2 + 32px));
+  padding-right: max(40vw, calc((100vw - 1300px) / 2 + 32px));
+}
+
+/* Custom cursor */
+@media (pointer: fine) {
+  body.has-cursor, body.has-cursor * { cursor: none !important; }
+}
+.custom-cursor-ring {
+  transition: width 0.35s ease, height 0.35s ease, border-color 0.35s ease, background-color 0.35s ease;
+}
+.custom-cursor-ring.is-active {
+  width: 56px;
+  height: 56px;
+  border-color: rgba(245, 237, 226, 0.85);
+  background-color: rgba(176, 136, 86, 0.12);
+}
+
+/* Hero character stagger */
+.char-stagger > span {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(28px);
+  animation: charIn 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: calc(var(--ci, 0) * 28ms + 100ms);
+}
+@keyframes charIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Cursor spotlight overlay used inside hero */
+.spotlight-mask {
+  background: radial-gradient(circle 320px at var(--mx, 50%) var(--my, 50%), transparent 0%, rgba(26, 19, 12, 0.38) 60%);
+  transition: background 0.2s linear;
+}
+
+/* Magnetic CTA shell */
+.magnetic { transition: transform 0.25s cubic-bezier(0.2, 0.7, 0.2, 1); will-change: transform; }

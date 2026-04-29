@@ -21,9 +21,9 @@ export default function Services() {
       <div className="relative max-w-[1300px] mx-auto px-5 sm:px-8">
         <Reveal>
           <h2 className="font-display text-[clamp(2.6rem,5vw,5rem)] leading-[1.02] tracking-[-0.025em] font-medium max-w-3xl">
-            A small studio,
+            A small studio.
             <br />
-            with a <span className="script-italic is-light">lot of detail.</span>
+            A lot of detail.
           </h2>
         </Reveal>
 

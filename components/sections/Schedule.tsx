@@ -17,7 +17,7 @@ export default function Schedule() {
       <div className="max-w-[1300px] mx-auto px-5 sm:px-8">
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-12">
           <h2 className="font-display text-[clamp(2.2rem,4.4vw,4rem)] leading-[1.04] tracking-[-0.02em] font-medium text-copper-900 max-w-2xl">
-            Book your <span className="script-italic">appointment.</span>
+            Full service menu.
           </h2>
           <a href={BOOK_URL} target="_blank" rel="noopener noreferrer" className="btn-primary self-start sm:self-end">
             Open Calendar

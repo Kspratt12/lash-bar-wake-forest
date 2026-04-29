@@ -15,57 +15,82 @@ const SLIDES: Slide[] = [
   { src: "/images/photo-4.png", alt: "Hybrid lash set", caption: "Hybrid", meta: "Texture · Definition" },
   { src: "/images/photo-5.png", alt: "Volume lash set", caption: "Volume", meta: "Density · Statement" },
   { src: "/images/photo-6.png", alt: "Soft natural lash set", caption: "Wispy", meta: "Romantic · Light fan" },
-  { src: "/images/photo-8.png", alt: "Custom lash mapping", caption: "Custom Mapped", meta: "Doll-eye style" },
+  { src: "/images/photo-8.png", alt: "Custom lash mapping", caption: "Doll Eye", meta: "Open · Lifted" },
+  { src: "/images/side.png", alt: "Close-up of a finished lash set", caption: "Up Close", meta: "On-the-chair detail" },
   { src: "/images/photo-10.png", alt: "Studio detail", caption: "Studio", meta: "On the chair" },
+  { src: "/images/photo-11.png", alt: "Lash artist detail", caption: "Cat Eye", meta: "Elongated · Lifted outer" },
+  { src: "/images/photo-13.png", alt: "Studio detail shot", caption: "Atelier", meta: "Inside the studio" },
   { src: "/images/photo-14.png", alt: "Hand-applied volume set", caption: "Volume Glam", meta: "Event-ready" },
   { src: "/images/photo-15.png", alt: "Boutique studio interior", caption: "Inside the Bar", meta: "Wake Forest, NC" },
 ];
 
+const AUTOPLAY_MS = 4500;
+
 export default function Lookbook() {
   const trackRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
-  const [canPrev, setCanPrev] = useState(false);
-  const [canNext, setCanNext] = useState(true);
+  const [paused, setPaused] = useState(false);
 
-  const updateState = useCallback(() => {
+  const getSlideStep = useCallback(() => {
+    const el = trackRef.current;
+    if (!el) return 0;
+    const slideEl = el.querySelector<HTMLElement>("[data-slide]");
+    if (!slideEl) return el.clientWidth;
+    return slideEl.offsetWidth + 16; // slide + gap-4
+  }, []);
+
+  const updateActive = useCallback(() => {
     const el = trackRef.current;
     if (!el) return;
-    const slideEl = el.querySelector<HTMLElement>("[data-slide]");
-    const slideWidth = slideEl ? slideEl.offsetWidth + 16 : el.clientWidth;
-    const idx = Math.round(el.scrollLeft / slideWidth);
+    const step = getSlideStep();
+    const idx = Math.round(el.scrollLeft / step);
     setActive(Math.min(SLIDES.length - 1, Math.max(0, idx)));
-    setCanPrev(el.scrollLeft > 8);
-    setCanNext(el.scrollLeft + el.clientWidth < el.scrollWidth - 8);
-  }, []);
+  }, [getSlideStep]);
 
   useEffect(() => {
     const el = trackRef.current;
     if (!el) return;
-    updateState();
-    const onScroll = () => updateState();
+    updateActive();
+    const onScroll = () => updateActive();
     el.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", updateState);
+    window.addEventListener("resize", updateActive);
     return () => {
       el.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", updateState);
+      window.removeEventListener("resize", updateActive);
     };
-  }, [updateState]);
+  }, [updateActive]);
+
+  // Auto-rotate
+  useEffect(() => {
+    if (paused) return;
+    const id = setInterval(() => {
+      const el = trackRef.current;
+      if (!el) return;
+      const step = getSlideStep();
+      const atEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 4;
+      if (atEnd) {
+        el.scrollTo({ left: 0, behavior: "smooth" });
+      } else {
+        el.scrollBy({ left: step, behavior: "smooth" });
+      }
+    }, AUTOPLAY_MS);
+    return () => clearInterval(id);
+  }, [paused, getSlideStep]);
 
   const scrollBy = (dir: 1 | -1) => {
     const el = trackRef.current;
     if (!el) return;
-    const slideEl = el.querySelector<HTMLElement>("[data-slide]");
-    const slideWidth = slideEl ? slideEl.offsetWidth + 16 : el.clientWidth;
-    el.scrollBy({ left: dir * slideWidth, behavior: "smooth" });
+    el.scrollBy({ left: dir * getSlideStep(), behavior: "smooth" });
   };
 
   const goTo = (i: number) => {
     const el = trackRef.current;
     if (!el) return;
-    const slideEl = el.querySelector<HTMLElement>("[data-slide]");
-    const slideWidth = slideEl ? slideEl.offsetWidth + 16 : el.clientWidth;
-    el.scrollTo({ left: i * slideWidth, behavior: "smooth" });
+    el.scrollTo({ left: i * getSlideStep(), behavior: "smooth" });
   };
+
+  const canPrev = active > 0;
+  const canNext = active < SLIDES.length - 1;
 
   return (
     <section id="lookbook" className="relative bg-copper-900 text-cream py-24 sm:py-32 overflow-hidden">
@@ -76,7 +101,7 @@ export default function Lookbook() {
               The Lookbook
             </div>
             <h2 className="mt-4 font-display text-[clamp(2.2rem,4.4vw,4rem)] leading-[1.04] tracking-[-0.02em] font-medium max-w-2xl">
-              Recent <span className="script-italic is-light">work.</span>
+              Recent work.
             </h2>
           </div>
 
@@ -121,16 +146,18 @@ export default function Lookbook() {
       <div
         ref={trackRef}
         className="overflow-x-auto no-scrollbar snap-x snap-mandatory scroll-smooth"
-        style={{ scrollPaddingLeft: "calc((100vw - min(100vw - 32px, 1300px)) / 2 + 20px)" }}
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+        onTouchStart={() => setPaused(true)}
       >
-        <div className="flex gap-4 px-5 sm:px-8 pb-2" style={{ paddingLeft: "max(20px, calc((100vw - 1300px) / 2 + 32px))", paddingRight: "max(20px, calc((100vw - 1300px) / 2 + 32px))" }}>
+        <div className="flex gap-4 pb-2 lookbook-rail">
           {SLIDES.map((s, i) => (
             <article
               key={s.src}
               data-slide
-              className="snap-start shrink-0 w-[78vw] sm:w-[58vw] md:w-[44vw] lg:w-[32vw] xl:w-[28vw] max-w-[480px] group"
+              className="snap-start shrink-0 w-[78vw] sm:w-[58vw] md:w-[44vw] lg:w-[32vw] xl:w-[28vw] max-w-[460px] group"
             >
-              <div className="relative aspect-[4/5] rounded-[24px] overflow-hidden bg-cardcream">
+              <div className="relative aspect-[4/5] rounded-[24px] overflow-hidden bg-cardcream/15">
                 <Image
                   src={s.src}
                   alt={s.alt}
@@ -139,7 +166,7 @@ export default function Lookbook() {
                   className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                 />
                 <div className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-3">
-                  <div className="bg-cream/85 backdrop-blur-md rounded-2xl px-5 py-3.5 max-w-[75%]">
+                  <div className="bg-cream/90 backdrop-blur-md rounded-2xl px-5 py-3.5 max-w-[75%]">
                     <div className="font-display text-[18px] tracking-[-0.005em] text-copper-900 leading-tight">
                       {s.caption}
                     </div>
@@ -147,7 +174,7 @@ export default function Lookbook() {
                       {s.meta}
                     </div>
                   </div>
-                  <div className="font-display italic text-cream text-[14px] bg-copper-900/60 backdrop-blur-md px-3 py-1.5 rounded-full tabular-nums">
+                  <div className="font-display italic text-cream text-[14px] bg-copper-900/65 backdrop-blur-md px-3 py-1.5 rounded-full tabular-nums">
                     {String(i + 1).padStart(2, "0")}
                   </div>
                 </div>

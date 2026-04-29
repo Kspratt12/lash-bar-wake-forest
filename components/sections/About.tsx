@@ -19,9 +19,9 @@ export default function About() {
 
         <Reveal delay={140} className="lg:col-span-7">
           <h2 className="font-display text-[clamp(2.4rem,4.8vw,4.4rem)] leading-[1.04] tracking-[-0.02em] font-medium text-copper-900">
-            Lashes that look
+            Lashes that look like
             <br />
-            <span className="script-italic">like the best version of yours.</span>
+            the best version of yours.
           </h2>
 
           <p className="mt-9 text-ink-soft text-[17px] leading-[1.85] font-light max-w-xl">

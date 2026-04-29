@@ -16,7 +16,7 @@ export default function AreasServed() {
       <div className="max-w-[1300px] mx-auto px-5 sm:px-8 grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
         <div className="lg:col-span-6 order-2 lg:order-1">
           <h2 className="font-display text-[clamp(2.2rem,4.4vw,4rem)] leading-[1.04] tracking-[-0.02em] font-medium text-copper-900">
-            From all over the <span className="script-italic">north end.</span>
+            Clients from all over the north end.
           </h2>
           <p className="mt-7 text-ink-soft text-[16.5px] leading-[1.85] font-light max-w-md">
             The studio is on S Main Street in Wake Forest, easy off Capital

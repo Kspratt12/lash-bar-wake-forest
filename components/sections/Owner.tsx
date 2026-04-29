@@ -12,7 +12,7 @@ export default function Owner() {
             The owner
           </div>
           <h2 className="mt-4 font-display text-[clamp(2.4rem,4.6vw,4rem)] leading-[1.04] tracking-[-0.02em] font-medium text-copper-900">
-            Hi, I&rsquo;m <span className="script-italic">Julia.</span>
+            Hi, I&rsquo;m Julia.
           </h2>
           <p className="mt-7 text-ink-soft text-[16.5px] leading-[1.85] font-light max-w-md">
             I opened Lash Bar Wake Forest because I wanted a space that felt like

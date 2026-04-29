@@ -38,7 +38,7 @@ export default function Testimonials() {
     <section id="reviews" className="relative bg-cream2 py-24 sm:py-32">
       <div className="max-w-[1300px] mx-auto px-5 sm:px-8">
         <h2 className="font-display text-[clamp(2.2rem,4.4vw,4rem)] leading-[1.04] tracking-[-0.02em] font-medium text-copper-900 max-w-3xl">
-          Words from <span className="script-italic">the chair.</span>
+          What clients say.
         </h2>
 
         <div className="mt-14 grid md:grid-cols-3 gap-5">

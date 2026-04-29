@@ -83,15 +83,18 @@ export default function Header() {
           ))}
         </nav>
 
-        <Link href="#home" className="flex items-center justify-self-start lg:justify-self-center gap-2.5" aria-label="Lash Bar Wake Forest home">
-          <Image
-            src="/images/lash-bar-wake-forest-logo.png"
-            alt="Lash Bar Wake Forest"
-            width={120}
-            height={120}
-            className="w-11 h-11 sm:w-12 sm:h-12 object-contain"
-            priority
-          />
+        <Link href="#home" className="flex items-center justify-self-start lg:justify-self-center gap-3 group" aria-label="Lash Bar Wake Forest home">
+          <span className="relative inline-block w-12 h-12 sm:w-[52px] sm:h-[52px]">
+            <span className="absolute inset-0 rounded-full ring-1 ring-copper-400/60 group-hover:ring-copper-700/80 transition-colors" />
+            <Image
+              src="/images/lash-bar-wake-forest-logo.png"
+              alt="Lash Bar Wake Forest"
+              width={120}
+              height={120}
+              className="absolute inset-1.5 w-[calc(100%-12px)] h-[calc(100%-12px)] object-contain transition-transform duration-700 group-hover:rotate-[-6deg]"
+              priority
+            />
+          </span>
           <span className="font-display text-[20px] sm:text-[24px] tracking-[-0.01em] text-copper-800 leading-tight">
             Lash Bar
             <span className="hidden sm:inline"> Wake Forest</span>
