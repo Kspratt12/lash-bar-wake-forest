@@ -40,3 +40,4 @@ next-env.d.ts
 /Videos
 public/videos/*.bak
 public/videos/hero-original.*
+public/videos/hero-prev.*
