@@ -14,7 +14,7 @@ function StaggerLine({ text, base = 0 }: { text: string; base?: number }) {
           style={{ ["--ci" as string]: base + i }}
           className="inline-block"
         >
-          {c === " " ? " " : c}
+          {c === " " ? " " : c}
         </span>
       ))}
     </span>
