@@ -38,3 +38,5 @@ next-env.d.ts
 # original asset folders (kept for source materials, not deployed)
 /Images
 /Videos
+public/videos/*.bak
+public/videos/hero-original.*

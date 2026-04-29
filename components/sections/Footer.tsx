@@ -69,9 +69,13 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-cream/10">
-        <div className="max-w-[1300px] mx-auto px-5 sm:px-8 py-5 flex flex-col sm:flex-row gap-2 items-center justify-between text-[11px] tracking-[0.18em] uppercase text-cream/45 font-light">
+        <div className="max-w-[1300px] mx-auto px-5 sm:px-8 py-5 flex flex-col sm:flex-row gap-3 items-center justify-between text-[11px] tracking-[0.18em] uppercase text-cream/45 font-light">
           <div>© {new Date().getFullYear()} Lash Bar Wake Forest</div>
-          <div>Wake Forest, NC</div>
+          <div className="flex items-center gap-5">
+            <a href="/privacy" className="hover:text-cream/85 transition">Privacy</a>
+            <a href="/terms" className="hover:text-cream/85 transition">Terms</a>
+            <span className="hidden sm:inline">Wake Forest, NC</span>
+          </div>
         </div>
       </div>
     </footer>

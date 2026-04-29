@@ -131,18 +131,10 @@ export default function Header() {
             href={BOOK_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className={`btn-pill transition-all duration-500 ${
-              onDark
-                ? "!bg-cream/12 !text-cream backdrop-blur-md"
-                : ""
-            }`}
+            className="magnetic inline-flex items-center gap-2.5 pl-2 pr-5 py-1.5 rounded-full bg-cream text-copper-900 font-medium text-[13px] tracking-[0.005em] hover:bg-cardtan transition-all"
           >
-            <span
-              className={`petal-bg transition-colors duration-500 ${
-                onDark ? "!bg-cream !text-copper-900" : ""
-              }`}
-            >
-              <Petal />
+            <span className="w-7 h-7 rounded-full bg-copper-900 text-cream grid place-items-center">
+              <Petal className="!w-3 !h-3" />
             </span>
             Book Appointment
           </a>
