@@ -15,7 +15,7 @@ export default function Editorial() {
       const r = sec.getBoundingClientRect();
       const vh = window.innerHeight;
       const progress = Math.min(1, Math.max(0, 1 - (r.top + r.height) / (vh + r.height)));
-      if (photo) photo.style.transform = `translate3d(0, ${(progress - 0.5) * 80}px, 0) scale(1.08)`;
+      if (photo) photo.style.transform = `translate3d(0, ${(progress - 0.5) * 90}px, 0) scale(1.1)`;
       raf = 0;
     };
     const onScroll = () => {
@@ -33,11 +33,11 @@ export default function Editorial() {
   return (
     <section
       ref={sectionRef}
-      className="relative h-[80svh] sm:h-[90svh] overflow-hidden"
+      className="relative h-[88svh] sm:h-[96svh] overflow-hidden bg-noir"
     >
-      <div data-bg className="absolute inset-[-6%] will-change-transform">
+      <div data-bg className="absolute inset-[-8%] will-change-transform">
         <Image
-          src="/images/cool-1.png"
+          src="/images/cool-landscape.png"
           alt=""
           fill
           sizes="100vw"
@@ -45,16 +45,35 @@ export default function Editorial() {
           className="object-cover"
         />
       </div>
-      <div className="absolute inset-0 bg-gradient-to-b from-[#1A130C]/30 via-[#1A130C]/15 to-[#1A130C]/55" />
+      <div className="absolute inset-0 bg-gradient-to-r from-noir/65 via-noir/15 to-noir/0" />
+      <div className="absolute inset-0 bg-gradient-to-t from-noir/55 via-transparent to-noir/30" />
 
-      <div className="relative h-full flex items-center justify-center px-6 text-center">
-        <div className="max-w-3xl">
-          <div className="text-[11px] tracking-[0.4em] uppercase text-cardtan font-medium">
-            Wake Forest, NC · By Appointment
+      <div className="relative h-full max-w-[1400px] mx-auto px-6 sm:px-12 grid grid-rows-[auto_1fr_auto] py-12 sm:py-16">
+        <div className="flex items-center justify-between text-bone/65 text-[10px] tracking-[0.4em] uppercase font-medium">
+          <div className="flex items-center gap-2">
+            <span className="w-6 h-px bg-bone/55" />
+            <span>Lash Bar Wake Forest</span>
           </div>
-          <p className="mt-7 font-display italic text-cream text-[clamp(2.2rem,5.5vw,5.2rem)] leading-[1.08] tracking-[-0.015em] font-light">
-            Soft life starts with effortless beauty.
+          <div className="hidden sm:flex items-center gap-2">
+            <span>Volume Two</span>
+            <span className="w-6 h-px bg-bone/55" />
+          </div>
+        </div>
+
+        <div className="self-end max-w-3xl">
+          <div className="text-[10px] tracking-[0.4em] uppercase text-bone/55 font-medium">
+            Issue · 01
+          </div>
+          <p className="mt-5 font-display text-bone text-[clamp(2.2rem,5.4vw,5.4rem)] leading-[1.06] tracking-[-0.018em] font-light">
+            <span className="italic">Soft life</span> starts with
+            <br />
+            effortless <span className="italic">beauty.</span>
           </p>
+        </div>
+
+        <div className="flex items-end justify-between text-bone/55 text-[10px] tracking-[0.4em] uppercase font-medium">
+          <div>2000 S Main St · Wake Forest, NC</div>
+          <div className="hidden sm:block tabular-nums">02 / Editorial</div>
         </div>
       </div>
     </section>

@@ -25,6 +25,8 @@ const config: Config = {
         cream2: "#EFE4D2",
         cardtan: "#EAD7BD",
         cardcream: "#F0E2CE",
+        bone: "#F8F6F2",
+        noir: "#0E0C0A",
         ink: "#2D2014",
         "ink-soft": "#6B4F32",
         muted: "#8A7560",

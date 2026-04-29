@@ -76,7 +76,6 @@ export default function Lookbook() {
     return () => clearInterval(id);
   }, [paused, getSlideStep]);
 
-  // Vertical parallax on photos as the section scrolls through the viewport
   useEffect(() => {
     const sec = sectionRef.current;
     if (!sec) return;
@@ -85,7 +84,7 @@ export default function Lookbook() {
       const r = sec.getBoundingClientRect();
       const vh = window.innerHeight;
       const progress = Math.min(1, Math.max(0, 1 - (r.top + r.height) / (vh + r.height)));
-      const offset = (progress - 0.5) * 60; // -30..+30 px
+      const offset = (progress - 0.5) * 60;
       sec.querySelectorAll<HTMLElement>("[data-parallax]").forEach((el) => {
         el.style.transform = `translate3d(0, ${offset}px, 0)`;
       });
@@ -122,21 +121,21 @@ export default function Lookbook() {
     <section
       id="lookbook"
       ref={sectionRef}
-      className="relative bg-copper-900 text-cream py-24 sm:py-32 overflow-hidden"
+      className="relative bg-bone text-noir py-24 sm:py-32 overflow-hidden"
     >
       <div className="max-w-[1300px] mx-auto px-5 sm:px-8">
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-12">
           <div>
-            <div className="text-[12px] tracking-[0.32em] uppercase text-cardtan font-medium">
-              The Lookbook
+            <div className="text-[11px] tracking-[0.4em] uppercase text-noir/55 font-medium">
+              No. 01 / The Lookbook
             </div>
-            <h2 className="mt-4 font-display text-[clamp(2.2rem,4.4vw,4rem)] leading-[1.04] tracking-[-0.02em] font-medium max-w-2xl">
+            <h2 className="mt-5 font-display text-[clamp(2.4rem,5vw,4.6rem)] leading-[1.02] tracking-[-0.025em] font-medium max-w-2xl">
               Recent work.
             </h2>
           </div>
 
           <div className="flex items-center gap-3">
-            <span className="font-display text-[15px] italic text-cardtan tabular-nums">
+            <span className="font-display text-[15px] italic text-noir/55 tabular-nums">
               {String(active + 1).padStart(2, "0")} / {String(SLIDES.length).padStart(2, "0")}
             </span>
             <button
@@ -146,11 +145,11 @@ export default function Lookbook() {
               disabled={!canPrev}
               className={`w-11 h-11 rounded-full grid place-items-center transition-all ${
                 canPrev
-                  ? "bg-cream text-copper-900 hover:bg-cardtan"
-                  : "bg-cream/15 text-cream/40 cursor-not-allowed"
+                  ? "bg-noir text-bone hover:bg-noir/85"
+                  : "bg-noir/8 text-noir/30 cursor-not-allowed"
               }`}
             >
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
                 <path d="M19 12H5M12 19l-7-7 7-7" />
               </svg>
             </button>
@@ -161,11 +160,11 @@ export default function Lookbook() {
               disabled={!canNext}
               className={`w-11 h-11 rounded-full grid place-items-center transition-all ${
                 canNext
-                  ? "bg-cream text-copper-900 hover:bg-cardtan"
-                  : "bg-cream/15 text-cream/40 cursor-not-allowed"
+                  ? "bg-noir text-bone hover:bg-noir/85"
+                  : "bg-noir/8 text-noir/30 cursor-not-allowed"
               }`}
             >
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
                 <path d="M5 12h14M13 5l7 7-7 7" />
               </svg>
             </button>
@@ -187,23 +186,23 @@ export default function Lookbook() {
               data-slide
               className="snap-start shrink-0 w-[78vw] sm:w-[58vw] md:w-[44vw] lg:w-[32vw] xl:w-[28vw] max-w-[460px] group"
             >
-              <div className="relative aspect-[4/5] rounded-[24px] overflow-hidden bg-cream/[0.06]">
+              <div className="relative aspect-[4/5] rounded-[2px] overflow-hidden bg-noir/[0.04]">
                 <div data-parallax className="absolute inset-0 will-change-transform">
                   <Image
                     src={s.src}
                     alt={s.alt}
                     fill
                     sizes="(max-width: 640px) 78vw, (max-width: 1024px) 44vw, 30vw"
-                    className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                    className="object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.2,0.7,0.2,1)] group-hover:scale-[1.04]"
                   />
                 </div>
-                <div className="absolute inset-x-5 bottom-5 flex items-end justify-between gap-3 pointer-events-none">
-                  <div className="font-display italic text-cream text-[22px] tracking-[-0.005em] drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]">
-                    {s.caption}
-                  </div>
-                  <div className="font-display text-cream/70 text-[12px] tabular-nums">
-                    {String(i + 1).padStart(2, "0")} / {String(SLIDES.length).padStart(2, "0")}
-                  </div>
+              </div>
+              <div className="mt-5 flex items-baseline justify-between">
+                <div className="font-display text-[20px] tracking-[-0.005em] text-noir">
+                  {s.caption}
+                </div>
+                <div className="font-display italic text-noir/40 text-[13px] tabular-nums">
+                  {String(i + 1).padStart(2, "0")}
                 </div>
               </div>
             </article>
@@ -211,15 +210,15 @@ export default function Lookbook() {
         </div>
       </div>
 
-      <div className="max-w-[1300px] mx-auto px-5 sm:px-8 mt-8 flex items-center justify-center gap-1.5">
+      <div className="max-w-[1300px] mx-auto px-5 sm:px-8 mt-10 flex items-center justify-center gap-1.5">
         {SLIDES.map((_, i) => (
           <button
             key={i}
             type="button"
             aria-label={`Go to slide ${i + 1}`}
             onClick={() => goTo(i)}
-            className={`h-1 rounded-full transition-all ${
-              i === active ? "w-8 bg-cream" : "w-3 bg-cream/30 hover:bg-cream/60"
+            className={`h-[2px] rounded-full transition-all ${
+              i === active ? "w-10 bg-noir" : "w-3 bg-noir/20 hover:bg-noir/45"
             }`}
           />
         ))}
