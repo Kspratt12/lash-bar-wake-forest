@@ -89,19 +89,13 @@ export default function Contact() {
         </div>
 
         <div className="lg:col-span-7">
-          <div className="relative w-full aspect-[5/4] rounded-[28px] overflow-hidden ring-1 ring-rule">
+          <div className="relative w-full aspect-[5/4] rounded-[28px] overflow-hidden ring-1 ring-rule shadow-[0_30px_70px_-30px_rgba(45,32,20,0.35)]">
             <iframe
               title="Map of Lash Bar Wake Forest"
               src={`https://www.google.com/maps?q=${MAP_QUERY}&output=embed`}
               className="w-full h-full"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              style={{ filter: "sepia(35%) saturate(70%) hue-rotate(-8deg) contrast(0.95) brightness(0.98)" }}
-            />
-            <div
-              aria-hidden
-              className="absolute inset-0 pointer-events-none mix-blend-multiply"
-              style={{ background: "linear-gradient(135deg, rgba(155, 113, 72, 0.12), rgba(176, 136, 86, 0.08))" }}
             />
           </div>
         </div>
